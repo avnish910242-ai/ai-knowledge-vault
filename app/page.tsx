@@ -5,6 +5,7 @@ import { FormEvent, useEffect, useMemo, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import DiagramViewer from "./components/DiagramViewer";
+import ExtensionImportBridge from "./components/ExtensionImportBridge";
 import { classifySubject, listTopics, putTopic, removeTopic, SUBJECTS, StudyTopic, Subject, SavedDiagram } from "./lib/study-library";
 
 type View = "Home" | "My Study Library" | "Subjects";
@@ -206,6 +207,7 @@ export default function Home() {
       </aside>
 
       <main className="min-w-0 flex-1 px-4 py-6 sm:px-8 lg:px-12">
+        <ExtensionImportBridge />
         {view === "Home" && <>
           {!current && !answer && <header className="mx-auto mt-8 max-w-3xl text-center sm:mt-14">
             <span className="rounded-full bg-indigo-50 px-3 py-1.5 text-xs font-semibold text-indigo-700">YOUR PERSONAL STUDY SPACE</span>

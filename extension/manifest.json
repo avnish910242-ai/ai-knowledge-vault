@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "AI Knowledge Vault Downloader",
+  "version": "1.0.0",
+  "description": "Save images and supported study files to your local AI Knowledge Vault.",
+  "permissions": ["contextMenus", "storage", "activeTab", "tabs"],
+  "optional_host_permissions": ["http://*/*", "https://*/*"],
+  "host_permissions": ["http://localhost:3000/*", "http://127.0.0.1:3000/*"],
+  "background": { "service_worker": "background.js" },
+  "action": { "default_title": "AI Knowledge Vault Downloader", "default_popup": "popup.html" },
+  "content_scripts": [{
+    "matches": ["http://localhost:3000/*", "http://127.0.0.1:3000/*"],
+    "js": ["content-bridge.js"],
+    "run_at": "document_start"
+  }]
+}

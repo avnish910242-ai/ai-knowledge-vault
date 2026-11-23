@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
+  <title>AI Knowledge Vault</title>
+  <defs>
+    <linearGradient id="cover" x1="24" y1="34" x2="104" y2="99" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF9A3D"/>
+      <stop offset="1" stop-color="#EA580C"/>
+    </linearGradient>
+    <linearGradient id="pages" x1="34" y1="51" x2="96" y2="88" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF7ED"/>
+      <stop offset="1" stop-color="#FFEDD5"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Open book, with a sturdy orange cover and softly layered pages. -->
+  <path d="M63.5 43.5c-9.6-8.1-22.1-10.2-37.4-6.2-3.7 1-6.1 4.3-6.1 8.1v39.2c0 5.5 5.2 9.5 10.5 8.1 12.8-3.5 23.9-2.2 33 4.1 9.1-6.3 20.2-7.6 33-4.1 5.3 1.4 10.5-2.6 10.5-8.1V45.4c0-3.8-2.4-7.1-6.1-8.1-15.3-4-27.8-1.9-37.4 6.2Z" fill="url(#cover)"/>
+  <path d="M63.5 50c-8.2-6.1-18.2-7.7-30-4.8-1.6.4-2.7 1.9-2.7 3.6v33.4c0 2.3 2.2 4 4.4 3.4 10.8-2.9 20.2-1.8 28.3 3.3 8.1-5.1 17.5-6.2 28.3-3.3 2.2.6 4.4-1.1 4.4-3.4V48.8c0-1.7-1.1-3.2-2.7-3.6-11.8-2.9-21.8-1.3-30 4.8Z" fill="url(#pages)"/>
+  <path d="M63.5 51v37.9M40 55.5c6.6-1.1 12.6-.6 18 1.5M40 65c6.6-1.1 12.6-.6 18 1.5M40 74.5c6.6-1.1 12.6-.6 18 1.5M69 57c5.4-2.1 11.4-2.6 18-1.5M69 66.5c5.4-2.1 11.4-2.6 18-1.5M69 76c5.4-2.1 11.4-2.6 18-1.5" stroke="#C2410C" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.8"/>
+
+  <!-- AI spark above the book. -->
+  <path d="M64 13.5 68 24l10.5 4-10.5 4L64 42.5 60 32l-10.5-4L60 24l4-10.5Z" fill="#F97316"/>
+  <path d="M91.5 20.5v10M86.5 25.5h10" stroke="#FB923C" stroke-linecap="round" stroke-width="3"/>
+  <circle cx="38" cy="27" r="3" fill="#FDBA74"/>
+</svg>

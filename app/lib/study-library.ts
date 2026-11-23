@@ -44,7 +44,18 @@ export type StudyTopic = {
 
 const DB_NAME = "ai-study-library";
 const STORE_NAME = "topics";
-const DB_VERSION = 1;
+const DB_VERSION = 2;
+
+export type ImportedFile = {
+  id: string;
+  sha256: string;
+  name: string;
+  sourceUrl: string;
+  mimeType: string;
+  size: number;
+  blob: Blob;
+  savedAt: number;
+};
 
 function openDatabase(): Promise<IDBDatabase> {
   return new Promise((resolve, reject) => {
@@ -56,9 +67,46 @@ function openDatabase(): Promise<IDBDatabase> {
         store.createIndex("subject", "subject");
         store.createIndex("savedAt", "savedAt");
       }
+      if (!db.objectStoreNames.contains("imports")) {
+        const imports = db.createObjectStore("imports", { keyPath: "id" });
+        imports.createIndex("sha256", "sha256", { unique: true });
+        imports.createIndex("savedAt", "savedAt");
+      }
     };
     request.onsuccess = () => resolve(request.result);
     request.onerror = () => reject(request.error ?? new Error("Could not open local study library."));
+  });
+}
+
+export async function listImportedFiles(): Promise<ImportedFile[]> {
+  const db = await openDatabase();
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction("imports", "readonly");
+    const request = transaction.objectStore("imports").getAll();
+    request.onsuccess = () => resolve((request.result as ImportedFile[]).sort((a, b) => b.savedAt - a.savedAt));
+    request.onerror = () => reject(request.error ?? new Error("Could not load imported files."));
+    transaction.oncomplete = () => db.close();
+  });
+}
+
+export async function putImportedFile(file: ImportedFile): Promise<void> {
+  const db = await openDatabase();
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction("imports", "readwrite");
+    transaction.objectStore("imports").add(file);
+    transaction.oncomplete = () => { db.close(); resolve(); };
+    transaction.onerror = () => { db.close(); reject(transaction.error ?? new Error("This file may already exist in the vault.")); };
+    transaction.onabort = () => { db.close(); reject(transaction.error ?? new Error("Import was interrupted.")); };
+  });
+}
+
+export async function removeImportedFile(id: string): Promise<void> {
+  const db = await openDatabase();
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction("imports", "readwrite");
+    transaction.objectStore("imports").delete(id);
+    transaction.oncomplete = () => { db.close(); resolve(); };
+    transaction.onerror = () => { db.close(); reject(transaction.error ?? new Error("Could not remove imported file.")); };
   });
 }
 

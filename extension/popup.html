@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AI Knowledge Vault Downloader</title><link rel="stylesheet" href="popup.css"></head>
+<body>
+  <main>
+    <header><img src="icon.svg" alt=""><div><strong>AI Knowledge Vault</strong><span>Downloader</span></div></header>
+    <button id="openVault" class="secondary">Open AI Knowledge Vault</button>
+    <section class="panel">
+      <h2>Import from a website</h2>
+      <label for="sourceUrl">Image, PDF, or supported file URL</label>
+      <input id="sourceUrl" type="url" placeholder="https://example.com/file.pdf" autocomplete="url">
+      <button id="downloadUrl">Request permission & import</button>
+      <p class="hint">The site permission prompt appears before the file is fetched.</p>
+    </section>
+    <section class="panel">
+      <h2>Import a local file</h2>
+      <input id="localFile" type="file" accept="image/*,.pdf,.txt,.md,.csv,.json,.doc,.docx,.ppt,.pptx,.xls,.xlsx">
+    </section>
+    <p id="status" role="status" aria-live="polite"></p>
+    <section class="panel"><h2>Downloaded files</h2><ul id="fileList"></ul></section>
+  </main>
+  <script src="vault-store.js"></script><script src="popup.js"></script>
+</body>
+</html>
