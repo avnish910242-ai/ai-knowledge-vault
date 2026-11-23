@@ -1,0 +1,19 @@
+{
+  "id": "/",
+  "name": "AI Study Library",
+  "short_name": "Study Library",
+  "description": "Hindi educational explanations and an offline study library.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f7f8fa",
+  "theme_color": "#4f46e5",
+  "icons": [
+    {
+      "src": "/study-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

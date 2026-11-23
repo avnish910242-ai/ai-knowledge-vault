@@ -1,36 +1,28 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI Study Library
 
-## Getting Started
+A student study workspace built with Next.js. Search a topic for a Hindi explanation, view a sourced educational image or an AI-generated 2D SVG fallback, and save the complete topic for offline reading.
 
-First, run the development server:
+## Run locally
+
+Install dependencies and start the development server:
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Set `GEMINI_API_KEY` in `.env.local` for explanations, diagram analysis and generated SVG diagrams. The key is read by server routes and is not included in client code.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Study library and offline use
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Saved topics are stored in this browser's IndexedDB, including their explanation, subject, diagram analysis, image data and attribution. The library does not sync to other browsers or devices. A saved topic can be read offline after the app shell has been loaded once. Search and Gemini features need a connection.
 
-## Learn More
+The service worker caches the app shell and Next.js static assets. External 3D models are not currently provided; diagrams are identified as 2D images and are never presented as interactive models. Subject suggestions use local topic keywords and can be corrected from **Subjects**.
 
-To learn more about Next.js, take a look at the following resources:
+## Existing routes
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `/api/ask` — Gemini educational explanation
+- `/api/hybrid-diagram` — Wikimedia Commons and Openverse search with Gemini relevance checks
+- `/api/hybrid-diagram/analyze` — image analysis and local image copy for offline saving
+- `/api/diagram` — sanitized Gemini SVG diagram fallback
+- `/api/search` — Wikipedia search endpoint retained for compatibility
